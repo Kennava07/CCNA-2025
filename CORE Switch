@@ -1,0 +1,155 @@
+
+Switch show command
+
+1. sh mac address-table
+2. sh spanning-tree vlan1
+3. sh cdp neighbor
+   sh cdp neighbor detail
+4.sh int trunk
+5.sh vlan br
+6.sh vtp status
+7. sh etherchannel summary
+--------------------------------
+ 1 switch = domain
+--------------------------------
+802.1D Darna
+STP - Spanning Tree Protocol (Does below)
+-swallowing loops
+-BPDU loop prevention ( Bridge Protocol Dta 
+
+
+sh spanning-tree vlan 1
+
+1. Bridge ID Priority 32769  (priority 32768 sys-id-ext 1 = 32769)
+2. mac address (lower wins)
+3. port assignment (lower wins)
+
+*Port State*
+BLK
+LIS - 15 sec
+LRN - 15 sec
+FWD
+
+*ROLES*
+Designate - if all on desig, youre the master
+Roor - there can only be 1 root port
+Altenate - blk
+
+----------------------------\
+802.1W wolverine (speed balik)
+
+conf t
+ spanning-tree uplinkfast (network device like switch to switch-router,fw-sw)
+end
+
+conf t
+ int fa 0/9
+ spanning-tree portfast (endpoints)
+end
+
+*Port State*
+DSCRD
+LRN - 15 sec
+FWD
+
+------------------------
+802.1Q Quolo
+dot1q
+Trunking protocol
+-----------------
+TRUNKS ports
+-----------------
+- does not belong to any vlan
+- where untagged frames passes
+ needed for vlan info exchange
+
+conf t
+ int fa 0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+exit
+
+ sh vlan br
+ sh int trunk
+
+---------------------------
+VTP - Vlan Trunking Protocol
+----------------------------
+
+Server -Create,delete,modify, update
+Clients
+Transparent
+- 
+conf t
+ vtp version 2
+ vtp domain krap
+ vtp password nek
+ vtp mode server
+
+conf t
+ vtp version 2
+ vtp domain krap
+ vtp password nek
+ vtp mode client
+end
+ 
+
+------------------------------
+CREATING VLAN
+-----------------------
+
+conf t
+ vlan 2
+ name ant
+ vlan 3
+ name jon
+end
+
+----------------------------------
+Transfer ports to vlan
+
+conf t
+ int fa 0/9
+ switchport mode access
+ switchport access vlan 2
+-------------------------------
+
+Port Security (no saksak other switch from other)
+
+conf t
+ int fa 0/9
+ switchport mode access
+ switchport port-security
+ switchport port-security mac-address sticky
+ switchport port-security maximum 3
+ switchport port-security violation shutdown
+end
+
+SHOW: sh port-security address
+ 
+(to up again)
+
+conf t
+ int fa 0/9
+ no switchport port-security
+
+----------------------------------
+Etherchannel and Portchannel (Aggregetion
+----------------------------
+PAgP(Cisco to Cisco            VS            LAPC (Cisco to Others)
+
+Auto					     Active									
+Desirable                      ON            Passive
+--------------------------------------------
+conf t
+ int fa 0/1
+ channel-group 1 mode on
+ exi
+conf t
+ int fa 0/3
+ channel-group 1 mode on
+ exi
+
+ sh int fa 0/1
+ sh int po 1
+
