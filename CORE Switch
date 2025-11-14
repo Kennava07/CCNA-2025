@@ -1,5 +1,5 @@
 
-Switch show command
+#### Switch show command ####
 
 1. sh mac address-table
 2. sh spanning-tree vlan1
@@ -10,7 +10,7 @@ Switch show command
 6.sh vtp status
 7. sh etherchannel summary
 --------------------------------
- 1 switch = domain
+ 1 switch = 1 domain
 --------------------------------
 802.1D Darna
 STP - Spanning Tree Protocol (Does below)
